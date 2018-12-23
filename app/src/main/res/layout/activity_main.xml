@@ -30,5 +30,4 @@
             android:dividerHeight="0dp"
             android:groupIndicator="@null" />
     </android.support.design.widget.NavigationView>
-
 </android.support.v4.widget.DrawerLayout>
