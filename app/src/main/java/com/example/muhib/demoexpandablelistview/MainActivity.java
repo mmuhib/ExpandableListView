@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity
         if (header.get(groupPosition).isGroup) {
             if (!header.get(groupPosition).hasChildren) {
                 onBackPressed();
+                //"checking"
             }
         }
         return false;
