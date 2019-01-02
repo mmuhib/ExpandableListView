@@ -6,4 +6,9 @@ public class Abc {
     public String toString() {
         return super.toString();
     }
+
+    @Override
+    public boolean equals(@androidx.annotation.Nullable Object obj) {
+        return super.equals(obj);
+    }
 }
