@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ExpandableListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,29 +47,28 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void populateExpandableList() {
-expandableAdapter=new ExpandableAdapter(this,header,childlist);
-ex_listview.setAdapter(expandableAdapter);
-ex_listview.setIndicatorBounds(0,0);
-ex_listview.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+    expandableAdapter=new ExpandableAdapter(this,header,childlist);
+    ex_listview.setAdapter(expandableAdapter);
+    ex_listview.setIndicatorBounds(0,0);
+    ex_listview.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
     @Override
     public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
         if (header.get(groupPosition).isGroup) {
             if (!header.get(groupPosition).hasChildren) {
                 onBackPressed();
+                //"checking"
             }
         }
         return false;
     }
 });
-ex_listview.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+    ex_listview.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
     @Override
     public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
         if (childlist.get(header.get(groupPosition)) != null) {
             MenuModel model = childlist.get(header.get(groupPosition)).get(childPosition);
-            if (model.url.length() > 0) {
-                onBackPressed();
-            }
-        }
+            Toast.makeText(getApplicationContext(),model.menuName,Toast.LENGTH_SHORT).show();
+           }
         return false;
     }
 });
@@ -90,7 +90,12 @@ ex_listview.setOnChildClickListener(new ExpandableListView.OnChildClickListener(
         {
             childlist.put(m,childModelsList);
         }
-
+        childModel= new MenuModel("women", false, false, "");
+        childModelsList.add(childModel);
+        if(m.hasChildren)
+        {
+            childlist.put(m,childModelsList);
+        }
     }
 
     @Override
